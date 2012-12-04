@@ -22,7 +22,7 @@ RaspGraph is tested using Soft-float Debian “wheezy” image (2012-08-08) avai
 ```	
 
 
-** Running pre-build version **
+**Running pre-build version**
 
 0. Create new folder on RassperyPi device - RaspGraph (name doesn't mater)
 1. Copy **dist** folders content to RaspGraphPi folder
@@ -39,7 +39,7 @@ RaspGraph is tested using Soft-float Debian “wheezy” image (2012-08-08) avai
 Sit back and relax
 
 
-** Making version from source **
+**Making version from source**
 
 0. Import RaspGraph as existing source in Eclipse
 1. Use build.xml file to compile source and build .jar file
