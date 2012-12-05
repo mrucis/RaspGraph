@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="RaspGraph" default="build" basedir=".">
+  <description>
+     Build runnable .jar from source
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="bin" location="bin"/>
+  <property name="lib"  location="lib"/>
+  <property name="dist"  location="dist"/>
+  <property name="projectName"  location="RaspGraph"/>
+  <path id="classpath">
+    <fileset dir="${lib}">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+  <manifestclasspath property="lib.list" jarfile="${lib}">
+    <classpath refid="classpath"/>
+  </manifestclasspath>
+  <target name="compile" depends="init">
+    <!-- Compile the java code from ${src} into ${bin} -->
+     <property name="myclasspath" refid="classpath"/>
+	<!-- Emit the property to the ant console -->
+	<echo message="Classpath = ${myclasspath}"/>
+    
+    
+    <javac srcdir="${src}" destdir="${bin}"
+     debug="true"
+     includeantruntime="false"
+     >
+     
+      <classpath refid="classpath"/>
+    </javac>
+  </target>
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${bin}"/>
+    <copy todir="${bin}/lib">
+      <fileset dir="${lib}" />
+    </copy>
+  </target>
+  <target name="build" depends="compile"
+        description="generate the distribution" >
+    <!-- Put everything in ${bin} into the ${projectName}_${DSTAMP}.jar file -->
+    <jar destfile="${dist}/RaspGraph.jar"
+     basedir="${bin}"
+     includes="**/*"    
+     >
+      <zipgroupfileset dir="${lib}" />
+      <manifest>
+        <attribute name="Main-Class" value="RaspGraph"/>
+        <!-- attribute name="Class-Path" value="${lib.list}"/-->         
+      </manifest>
+    </jar>
+  </target>
+  <target name="clean"
+        description="clean up" >
+    <!-- Delete the ${build} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${bin}"/>
+  </target>
+</project>
+
+
